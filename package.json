@@ -1,0 +1,31 @@
+{
+  "name": "yandex-translate-cli",
+  "version": "1.0.0",
+  "description": "yandex translate cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "preferGlobal": "true",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewnd9/yandex-translate-api.git"
+  },
+  "keywords": [
+    "yandex",
+    "translate",
+    "translator",
+    "dictionary",
+    "cli"
+  ],
+  "author": "ewnd9 <ewndnine@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "inquirer-credentials": "^1.1.0",
+    "lodash": "^3.10.1",
+    "meow": "^3.3.0",
+    "yandex-dictionary": "0.0.0",
+    "yandex.translate": "^1.0.1"
+  }
+}
