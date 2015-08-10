@@ -29,6 +29,6 @@
     "lodash": "^3.10.1",
     "meow": "^3.3.0",
     "yandex-dictionary": "0.0.0",
-    "yandex.translate": "^1.0.1"
+    "yandex-translate": "^2.0.2"
   }
 }
