@@ -5,11 +5,11 @@ var joiner = function(prefix, array, delimiter, postfix) {
   return array.length > 0 ? prefix + array.join(delimiter) + postfix : '';
 };
 
-var getDictionary = module.exports.getDictionary = function(dictionaryKey, input, fromLang, toLang) {
+var getDictionary = module.exports.getDictionary = function(dictionaryKey, input, fromLang, toLang, uiLang) {
   var yandexDictionary = require('yandex-dictionary')(dictionaryKey);
   var lookup = Promise.promisify(yandexDictionary.lookup);
 
-  return lookup(input, fromLang + '-' + toLang, { ui: toLang, flags: 1 }).then(function(res) {
+  return lookup(input, fromLang + '-' + toLang, { ui: uiLang, flags: 1 }).then(function(res) {
     return res.def;
   });
 };
@@ -17,7 +17,7 @@ var getDictionary = module.exports.getDictionary = function(dictionaryKey, input
 var printDictionary = module.exports.printDictionary = function(result) {
   _.each(result, function(word) {
     console.log(word.text + ' [' + word.ts + '] (' + word.pos + ')');
-    
+
     _.each(word.tr, function(translation) {
       var synonyms = _.map(translation.syn, function(syn) {
         return syn.text;

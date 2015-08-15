@@ -26,11 +26,17 @@ var toLangCredential = {
   type: 'input'
 };
 
+var interfaceCredential = {
+  name: 'interface language (2 symbols)',
+  type: 'input'
+};
+
 var credentials = [
   translateCredential,
   dictionaryCredential,
   fromLangCredential,
-  toLangCredential
+  toLangCredential,
+  interfaceCredential
 ];
 
 credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result) {
@@ -40,15 +46,14 @@ credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result
   var fromLang = result[fromLangCredential.name];
   var toLang = result[toLangCredential.name];
 
+  var uiLang = result[interfaceCredential.name];
+
   var meow = require('meow');
   var cli = meow({
     help: [
       'Usage',
       '  yandex-translate <input>',
-      '  yandex-translate <input> --from="en" --to="ru"',
-      '',
-      '  # translate from default destination language to default origin language',
-      '  yandex-translate <input> --reverse',
+      '  yandex-translate <input> --from="en" --to="ru"'
     ]
   });
 
@@ -71,24 +76,30 @@ credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result
   if (input.length === 0) {
     cli.showHelp();
   } else {
-
     var lib = require('./index');
 
-    lib.getDictionary(dictionaryKey, input, fromLang, toLang).then(function(result) {
-      if (result.length === 0) {
-        var translate = require('yandex-translate')(translateKey);
+    var translateInput = function(fromLang, toLang) {
+      lib.getDictionary(dictionaryKey, input, fromLang, toLang, uiLang).then(function(result) {
+        if (result.length === 0) {
+          var translate = require('yandex-translate')(translateKey);
 
-        translate.translate(input, { to: toLang }, function(err, res) {
-          var _ = require('lodash');
+          translate.translate(input, { to: toLang }, function(err, res) {
+            var _ = require('lodash');
 
-          _.each(res.text, function(translation) {
-            console.log(translation);
+            if (res.text.length === 1 && res.text[0] === input) {
+              translateInput(toLang, fromLang);
+            } else {
+              _.each(res.text, function(translation) {
+                console.log(translation);
+              });
+            }
           });
-        });
-      } else {
-        lib.printDictionary(result);
-      }
-    });
+        } else {
+          lib.printDictionary(result);
+        }
+      });
+    };
 
+    translateInput(fromLang, toLang);
   }
 });
