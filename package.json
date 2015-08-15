@@ -1,18 +1,18 @@
 {
-  "name": "yandex-translate-cli",
-  "version": "1.0.2",
-  "description": "yandex translate cli",
+  "name": "dictionary-cli",
+  "version": "1.0.0",
+  "description": "translations and usage examples via yandex services",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "yandex-translate": "cli.js"
+    "dictionary": "cli.js"
   },
   "preferGlobal": "true",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ewnd9/yandex-translate-api.git"
+    "url": "git+https://github.com/ewnd9/dictionary-api.git"
   },
   "keywords": [
     "yandex",

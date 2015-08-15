@@ -1,25 +1,28 @@
-# yandex-translate-api
+# dictionary-cli
 
-Translate text from cli via combination of
-[yandex translate api](https://tech.yandex.ru/translate/)
+translations and usage examples via [yandex translate api](https://tech.yandex.ru/translate/)
 and
 [yandex dictionary api](https://tech.yandex.ru/dictionary/)
+
+## API access
+
+You need to obtain api keys to yandex services in order to use this package
 
 ## Install
 
 ```
-$ npm install -g yandex-translate-api
+$ npm install -g dictionary-cli
 ```
 
 ## Usage
 
 ```
   Usage
-    yandex-translate <input>
-    yandex-translate <input> --from="en" --to="ru"
+    dictionary <input>
+    dictionary <input> --from="en" --to="ru"
 
     # translate from default destination language to default origin language
-    yandex-translate <input> --reverse
+    dictionary <input> --reverse
 ```
 
 ## License
