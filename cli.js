@@ -39,7 +39,10 @@ var credentials = [
   interfaceCredential
 ];
 
-credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result) {
+var store = require('dot-file-config')('.dictionary-cli-npm');
+store.data.requests = store.data.requests || {};
+
+credentialsPrompt('.dictionary-cli-credentials-npm', credentials).then(function(result) {
   var translateKey = result[translateCredential.name];
   var dictionaryKey = result[dictionaryCredential.name];
 
@@ -53,7 +56,10 @@ credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result
     help: [
       'Usage',
       '  yandex-translate <input>',
-      '  yandex-translate <input> --from="en" --to="ru"'
+      '  yandex-translate <input> --from="en" --to="ru"',
+      '',
+      'Data',
+      '  ' + store.path
     ]
   });
 
@@ -86,14 +92,34 @@ credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result
       return lib.getTranslation(translateKey, input, fromLang, toLang);
     };
 
+    var log = function(reverse, fromLang, toLang, result) {
+      store.data.requests[new Date().toString()] = {
+        input: input,
+        fromLang: fromLang,
+        toLang: toLang,
+        reverse: reverse,
+        result: result
+      };
+      store.save();
+    };
+
+    var reverse = false;
+
     return dictionary(fromLang, toLang).then(null, function(err) {
+      reverse = true;
       return dictionary(toLang, fromLang);
     }).then(function(result) {
       lib.printDictionary(result);
+      log(reverse, fromLang, toLang, result);
     }, function(err) {
-      return translate(fromLang, toLang).then(null, function(err) {
+      return translate(fromLang, toLang).then(function(result) {
+        reverse = false;
+        return result;
+      }, function(err) {
+        reverse = true;
         return translate(toLang, fromLang);
       }).then(function(result) {
+        log(reverse, fromLang, toLang, result);
         console.log(result.join('\n'));
       });
     }).catch(function(err) {
