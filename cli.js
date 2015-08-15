@@ -78,28 +78,30 @@ credentialsPrompt('.yandex-translate-cli-npm', credentials).then(function(result
   } else {
     var lib = require('./index');
 
-    var translateInput = function(fromLang, toLang) {
-      lib.getDictionary(dictionaryKey, input, fromLang, toLang, uiLang).then(function(result) {
-        if (result.length === 0) {
-          var translate = require('yandex-translate')(translateKey);
-
-          translate.translate(input, { to: toLang }, function(err, res) {
-            var _ = require('lodash');
-
-            if (res.text.length === 1 && res.text[0] === input) {
-              translateInput(toLang, fromLang);
-            } else {
-              _.each(res.text, function(translation) {
-                console.log(translation);
-              });
-            }
-          });
-        } else {
-          lib.printDictionary(result);
-        }
-      });
+    var dictionary = function(fromLang, toLang) {
+      return lib.getDictionary(dictionaryKey, input, fromLang, toLang, uiLang);
     };
 
-    translateInput(fromLang, toLang);
+    var translate = function(fromLang, toLang) {
+      return lib.getTranslation(translateKey, input, fromLang, toLang);
+    };
+
+    return dictionary(fromLang, toLang).then(null, function(err) {
+      return dictionary(toLang, fromLang);
+    }).then(function(result) {
+      lib.printDictionary(result);
+    }, function(err) {
+      return translate(fromLang, toLang).then(null, function(err) {
+        return translate(toLang, fromLang);
+      }).then(function(result) {
+        console.log(result.join('\n'));
+      });
+    }).catch(function(err) {
+      if (err.message === 'no translation') {
+        console.log('no translation');
+      } else {
+        throw err;
+      }
+    });
   }
 });

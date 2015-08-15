@@ -5,12 +5,29 @@ var joiner = function(prefix, array, delimiter, postfix) {
   return array.length > 0 ? prefix + array.join(delimiter) + postfix : '';
 };
 
+module.exports.getTranslation = function(translateKey, input, fromLang, toLang) {
+  var translateLib = require('yandex-translate')(translateKey);
+  var translate = Promise.promisify(translateLib.translate);
+
+  return translate(input, { to: toLang }).then(function(res) {
+    if (res.text.length === 1 && res.text[0] === input) {
+      throw new Error('no translation');
+    } else {
+      return res.text;
+    }
+  });
+};
+
 var getDictionary = module.exports.getDictionary = function(dictionaryKey, input, fromLang, toLang, uiLang) {
   var yandexDictionary = require('yandex-dictionary')(dictionaryKey);
   var lookup = Promise.promisify(yandexDictionary.lookup);
 
   return lookup(input, fromLang + '-' + toLang, { ui: uiLang, flags: 1 }).then(function(res) {
-    return res.def;
+    if (res.def.length === 0) {
+      throw new Error('empty-result');
+    } else {
+      return res.def;
+    }
   });
 };
 
