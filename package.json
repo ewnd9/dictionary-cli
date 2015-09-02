@@ -12,7 +12,7 @@
   "preferGlobal": "true",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ewnd9/dictionary-api.git"
+    "url": "git+https://github.com/ewnd9/dictionary-cli.git"
   },
   "keywords": [
     "yandex",
