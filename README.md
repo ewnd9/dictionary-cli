@@ -4,6 +4,8 @@ translations and usage examples via [yandex translate api](https://tech.yandex.r
 and
 [yandex dictionary api](https://tech.yandex.ru/dictionary/)
 
+![Demonstration](/demo.gif?raw=true)
+
 ## API access
 
 You need to obtain api keys to yandex services in order to use this package
