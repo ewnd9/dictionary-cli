@@ -7,28 +7,33 @@ var credentialsPrompt = require('inquirer-credentials');
 var translateCredential = {
   name: 'yandex-translate api key',
   type: 'input',
-  hint: 'get it via https://tech.yandex.ru/translate/'
+  hint: 'get it via https://tech.yandex.ru/translate/',
+  env: 'YANDEX_TRANSLATE_KEY'
 };
 
 var dictionaryCredential = {
   name: 'yandex-dictionary api key',
   type: 'input',
-  hint: 'get it via https://tech.yandex.ru/dictionary/'
+  hint: 'get it via https://tech.yandex.ru/dictionary/',
+  env: 'YANDEX_DICTIONARY_KEY'
 };
 
 var fromLangCredential = {
   name: 'default source language (2 symbols)',
-  type: 'input'
+  type: 'input',
+  env: 'FROM_LANG'
 };
 
 var toLangCredential = {
   name: 'default translation language (2 symbols)',
-  type: 'input'
+  type: 'input',
+  env: 'TO_LANG'
 };
 
 var interfaceCredential = {
   name: 'interface language (2 symbols)',
-  type: 'input'
+  type: 'input',
+  env: 'INTERFACE_LANG'
 };
 
 var credentials = [

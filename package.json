@@ -4,7 +4,7 @@
   "description": "translations and usage examples via yandex services",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "bin": {
     "dictionary": "cli.js"
@@ -26,10 +26,14 @@
   "dependencies": {
     "bluebird": "^2.9.34",
     "dot-file-config": "^0.4.0",
-    "inquirer-credentials": "^1.1.0",
+    "inquirer-credentials": "^1.2.0",
     "lodash": "^3.10.1",
     "meow": "^3.3.0",
     "yandex-dictionary": "0.0.0",
     "yandex-translate": "^2.0.2"
+  },
+  "devDependencies": {
+    "ava": "^0.2.0",
+    "concat-stream": "^1.5.0"
   }
 }
