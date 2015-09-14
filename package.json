@@ -1,6 +1,6 @@
 {
   "name": "dictionary-cli",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "translations and usage examples via yandex services",
   "main": "index.js",
   "scripts": {
