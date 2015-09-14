@@ -2,9 +2,11 @@
 
 [![Build Status](https://travis-ci.org/ewnd9/dictionary-cli.svg?branch=master)](https://travis-ci.org/ewnd9/dictionary-cli)
 
-translations and usage examples via [yandex translate api](https://tech.yandex.ru/translate/)
+Translations and words usage examples via [yandex translate api](https://tech.yandex.ru/translate/)
 and
 [yandex dictionary api](https://tech.yandex.ru/dictionary/)
+
+Also history management with export to [memrise.com](http://www.memrise.com/) format
 
 ![Demonstration](/demo.gif?raw=true)
 
@@ -24,10 +26,12 @@ $ npm install -g dictionary-cli
   Usage
     dictionary <input>
     dictionary <input> --from="en" --to="ru"
-
-    # translate from default destination language to default origin language
-    dictionary <input> --reverse
+    dictionary --export > history.txt
 ```
+
+## Similar projects
+
+- https://github.com/AnkurGel/dictionary-rb
 
 ## License
 
