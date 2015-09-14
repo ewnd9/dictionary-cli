@@ -1,5 +1,7 @@
 # dictionary-cli
 
+[![Build Status](https://travis-ci.org/ewnd9/dictionary-cli.svg?branch=master)](https://travis-ci.org/ewnd9/dictionary-cli)
+
 translations and usage examples via [yandex translate api](https://tech.yandex.ru/translate/)
 and
 [yandex dictionary api](https://tech.yandex.ru/dictionary/)
