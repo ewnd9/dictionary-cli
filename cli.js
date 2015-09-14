@@ -36,16 +36,20 @@ var interfaceCredential = {
   env: 'INTERFACE_LANG'
 };
 
+var historyCredential = {
+  name: 'save history (yes or no)',
+  type: 'input',
+  env: 'SAVE_HISTORY'
+};
+
 var credentials = [
   translateCredential,
   dictionaryCredential,
   fromLangCredential,
   toLangCredential,
-  interfaceCredential
+  interfaceCredential,
+  historyCredential
 ];
-
-var store = require('dot-file-config')('.dictionary-cli-npm');
-store.data.requests = store.data.requests || {};
 
 credentialsPrompt('.dictionary-cli-credentials-npm', credentials).then(function(result) {
   var translateKey = result[translateCredential.name];
@@ -56,6 +60,14 @@ credentialsPrompt('.dictionary-cli-credentials-npm', credentials).then(function(
 
   var uiLang = result[interfaceCredential.name];
 
+  var saveHistory = result[historyCredential.name];
+
+  var store = null;
+  if (saveHistory === 'yes') {
+    store = require('dot-file-config')('.dictionary-cli-npm');
+    store.data.requests = store.data.requests || {};
+  }
+
   var meow = require('meow');
   var cli = meow({
     help: [
@@ -64,7 +76,7 @@ credentialsPrompt('.dictionary-cli-credentials-npm', credentials).then(function(
       '  yandex-translate <input> --from="en" --to="ru"',
       '',
       'Data',
-      '  ' + store.path
+      '  ' + (store || {}).path
     ]
   });
 
@@ -98,6 +110,10 @@ credentialsPrompt('.dictionary-cli-credentials-npm', credentials).then(function(
     };
 
     var log = function(reverse, fromLang, toLang, result) {
+      if (!store) {
+        return;
+      }
+
       store.data.requests[new Date().toString()] = {
         input: input,
         fromLang: fromLang,
