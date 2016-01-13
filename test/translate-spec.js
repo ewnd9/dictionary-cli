@@ -1,13 +1,15 @@
 import test from 'ava';
+import 'babel-core/register';
+
 import path from 'path';
 import concatStream from 'concat-stream';
 import { spawn } from 'child_process';
 
-import lib from './../lib/index';
+import { translate } from './../lib/index';
 import format from './../lib/exporter';
 
 test('#translate dictionary', async t => {
-	const { type, result } = await lib.translate('en', 'ru', 'java');
+	const { type, result } = await translate('en', 'ru', 'java');
 
 	t.is(type, 'dictionary');
 	t.is(result.length, 2);
@@ -20,7 +22,7 @@ test('#translate dictionary', async t => {
 });
 
 test('#translate translate', async t => {
-	const { type, result } = await lib.translate('ru', 'en', 'освободившаяся');
+	const { type, result } = await translate('ru', 'en', 'освободившаяся');
 
 	t.is(type, 'translate');
 	t.is(result.length, 1);
@@ -30,7 +32,7 @@ test('#translate translate', async t => {
 });
 
 test('#format', async t => {
-	const response = await lib.translate('en', 'ru', 'test');
+	const response = await translate('en', 'ru', 'test');
 	const mock = {
 		...response,
 		fromLang: 'en',
