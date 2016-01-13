@@ -30,11 +30,10 @@
   "dependencies": {
     "bluebird": "^2.9.34",
     "dot-file-config": "^0.4.0",
+    "got": "^6.0.2",
     "lodash": "^3.10.1",
     "meow": "^3.7.0",
-    "update-notifier": "^0.6.0",
-    "yandex-dictionary": "0.0.0",
-    "yandex-translate": "^2.0.2"
+    "update-notifier": "^0.6.0"
   },
   "devDependencies": {
     "ava": "^0.9.1",

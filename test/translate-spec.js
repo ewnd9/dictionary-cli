@@ -22,13 +22,12 @@ test('#translate dictionary', async t => {
 });
 
 test('#translate translate', async t => {
-	const { type, result } = await translate('ru', 'en', 'освободившаяся');
-
+	const { type, result } = await translate('ru', 'en', 'словарь может переводить только слова');
 	t.is(type, 'translate');
 	t.is(result.length, 1);
 
 	t.is(typeof result[0], 'string');
-	t.is(result[0], 'released');
+	t.is(result[0], 'the dictionary can only translate the words');
 });
 
 test('#format', async t => {
