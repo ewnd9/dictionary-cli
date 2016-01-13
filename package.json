@@ -14,6 +14,9 @@
     "dictionary": "cli.js"
   },
   "preferGlobal": "true",
+  "engines": {
+    "node" : ">=4.0" 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ewnd9/dictionary-cli.git"

@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/ewnd9/dictionary-cli.svg?branch=master)](https://travis-ci.org/ewnd9/dictionary-cli)
 
+> :warning: requires node >= 4.0
+
 Translations and words usage examples via
 [yandex translate api](https://tech.yandex.ru/translate/)
 ([supported languages](https://tech.yandex.ru/translate/doc/dg/concepts/langs-docpage/))
