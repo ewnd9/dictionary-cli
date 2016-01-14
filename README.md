@@ -25,15 +25,25 @@ $ npm install -g dictionary-cli
 
 ```
 $ dictionary <lang-from> <lang-to> <input>
+
+# if input matches /[a-zA-Z]/ it will translate from english to <lang>, otherwise from <lang> to english
+dictionary --en=<lang> <input>
+# if input matches /[а-яА-Я]/ it will translate from russian to <lang>, otherwise from <lang> to russian
+dictionary --ru=<lang> <input>
+
 $ dictionary <lang> --export
 $ dictionary <lang> --export > history.txt
 ```
+
+:shipit: Feel free to send PR for auto detection of other languages
 
 ## Tips
 
 Add aliases for language pairs in your `.bashrc` / `.zshrc`
 
 ```
+alias d="dictionary --en=ru" # use as "d <english or russian word or sentence>"
+# or
 alias d="dictionary en ru" # use as "d <english word or sentence>"
 alias x="dictionary ru en" # use as "x <russian word or sentence>"
 ```

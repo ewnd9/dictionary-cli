@@ -42,13 +42,45 @@ test('#format', async t => {
 	t.is(data[0], 'суровое испытание\tseverest test');
 });
 
+const exec = (args, output) => {
+	const concat = concatStream(output);
+
+	const cp = spawn(path.resolve(__dirname, '..', 'cli.js'), args);
+	cp.stdout.setEncoding('utf8');
+	cp.stdout.pipe(concat);
+};
+
 test.cb('cli stdin/stdout', t => {
-	const concat = concatStream(str => {
+	exec(['en', 'ru', 'u'], str => {
 		t.ok(/ед/.test(str));
 		t.end();
 	});
+});
 
-	const cp = spawn(path.resolve(__dirname, '..', 'cli.js'), ['en', 'ru', 'u']);
-	cp.stdout.setEncoding('utf8');
-	cp.stdout.pipe(concat);
+test.cb('cli stdin/stdout en detection en-ru', t => {
+	exec(['--en=ru', 'u'], str => {
+		t.ok(/ед/.test(str));
+		t.end();
+	});
+});
+
+test.cb('cli stdin/stdout en detection ru-en', t => {
+	exec(['--en=ru', 'привет'], str => {
+		t.ok(/приветствие/g.test(str));
+		t.end();
+	});
+});
+
+test.cb('cli stdin/stdout ru detection en-ru', t => {
+	exec(['--ru=en', 'u'], str => {
+		t.ok(/ед/.test(str));
+		t.end();
+	});
+});
+
+test.cb('cli stdin/stdout ru detection ru-en', t => {
+	exec(['--ru=en', 'привет'], str => {
+		t.ok(/приветствие/g.test(str));
+		t.end();
+	});
 });
