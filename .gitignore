@@ -2,3 +2,5 @@
 *.log
 dist/*
 play.js
+.nyc_output
+coverage

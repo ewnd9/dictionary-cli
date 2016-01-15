@@ -1,14 +1,12 @@
 # dictionary-cli
 
 [![Build Status](https://travis-ci.org/ewnd9/dictionary-cli.svg?branch=master)](https://travis-ci.org/ewnd9/dictionary-cli)
+[![Coverage Status](https://coveralls.io/repos/ewnd9/dictionary-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/ewnd9/dictionary-cli?branch=master)
 
-> :warning: requires node >= 4.0
-
-Translations and words usage examples via
-[yandex translate api](https://tech.yandex.ru/translate/)
+Translations and usage examples via
+- [yandex translate api](https://tech.yandex.ru/translate/)
 ([supported languages](https://tech.yandex.ru/translate/doc/dg/concepts/langs-docpage/))
-and
-[yandex dictionary api](https://tech.yandex.ru/dictionary/)
+- [yandex dictionary api](https://tech.yandex.ru/dictionary/)
 ([supported languages](https://dictionary.yandex.net/api/v1/dicservice/getLangs?key=dict.1.1.20140616T070444Z.ecfe60ba07dd3ebc.9ce897a05d9daa488b050e5ec030f625d666530a))
 
 Export history to [memrise.com](http://www.memrise.com/) format
