@@ -24,10 +24,9 @@ test('#translate dictionary', async t => {
 test('#translate translate', async t => {
 	const { type, result } = await translate('ru', 'en', 'словарь может переводить только слова');
 	t.is(type, 'translate');
-	t.is(result.length, 1);
 
-	t.is(typeof result[0], 'string');
-	t.is(result[0], 'the dictionary can only translate the words');
+	t.is(typeof result, 'string');
+	t.is(result, 'the dictionary can only translate the words');
 });
 
 test('#format', async t => {
@@ -50,9 +49,16 @@ const exec = (args, output) => {
 	cp.stdout.pipe(concat);
 };
 
-test.cb('cli stdin/stdout', t => {
+test.cb('cli stdin/stdout default en-ru', t => {
 	exec(['en', 'ru', 'u'], str => {
 		t.ok(/ед/.test(str));
+		t.end();
+	});
+});
+
+test.cb('cli stdin/stdout spell correction en-ru', t => {
+	exec(['en', 'ru', 'powir'], str => {
+		t.ok(/nothing found.+power.+\nмощность/g.test(str));
 		t.end();
 	});
 });
