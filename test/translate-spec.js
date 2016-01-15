@@ -44,7 +44,7 @@ test('#format', async t => {
 const exec = (args, output) => {
 	const concat = concatStream(output);
 
-	const cp = spawn(path.resolve(__dirname, '..', 'cli.js'), args);
+	const cp = spawn(path.resolve(__dirname, '..', 'cli.es6.js'), args);
 	cp.stdout.setEncoding('utf8');
 	cp.stdout.pipe(concat);
 };
