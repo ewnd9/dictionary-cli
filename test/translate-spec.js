@@ -12,12 +12,12 @@ test('#translate dictionary', async t => {
 	const { type, result } = await translate('en', 'ru', 'java');
 
 	t.is(type, 'dictionary');
-	t.is(result.length, 2);
+	t.is(result.length, 4);
 
 	t.is(typeof result[0], 'object');
-	t.is(result[0].title, 'Java [ˈʤɑːvə] (noun)');
+	t.is(result[0].title, 'noun (ˈʤɑːvə)');
 
-	t.is(result[0].translations.length, 2);
+	t.is(result[0].translations.length, 1);
 	t.is(result[0].translations[0].examples.length, 0);
 });
 
@@ -38,7 +38,7 @@ test('#format', async t => {
 	};
 
 	const data = format([mock], 'en');
-	t.is(data[0], 'суровое испытание\tseverest test');
+	t.is(data[0], 'клиническое испытание\tclinical test');
 });
 
 const exec = (args, output) => {
@@ -58,7 +58,7 @@ test.cb('cli stdin/stdout default en-ru', t => {
 
 test.cb('cli stdin/stdout spell correction en-ru', t => {
 	exec(['en', 'ru', 'powir'], str => {
-		t.ok(/nothing found.+power.+\nмощность/g.test(str));
+		t.ok(/nothing found.+power/g.test(str));
 		t.end();
 	});
 });

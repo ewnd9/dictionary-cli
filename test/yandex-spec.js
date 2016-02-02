@@ -15,7 +15,7 @@ test('#translate', async t => {
 
 test('#dictionary', async t => {
 	const result = await yandex.dictionary('en', 'ru', 'java');
-	t.is(result[0].text, 'Java');
+	t.is(result[0].text, 'java');
 });
 
 test('#spellCheck', async t => {

@@ -29,7 +29,8 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.34",
-    "dot-file-config": "^0.4.0",
+    "chalk": "^1.1.1",
+    "dot-file-config": "^0.6.0",
     "got": "^5.3.1",
     "lodash": "^3.10.1",
     "meow": "^3.7.0",
