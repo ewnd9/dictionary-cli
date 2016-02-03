@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ewnd9/dictionary-cli.svg?branch=master)](https://travis-ci.org/ewnd9/dictionary-cli)
 [![Coverage Status](https://coveralls.io/repos/ewnd9/dictionary-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/ewnd9/dictionary-cli?branch=master)
 
-Translations and usage examples via
+Translations, usage examples and spell check via
 - [yandex translate api](https://tech.yandex.ru/translate/)
 ([supported languages](https://tech.yandex.ru/translate/doc/dg/concepts/langs-docpage/))
 - [yandex dictionary api](https://tech.yandex.ru/dictionary/)

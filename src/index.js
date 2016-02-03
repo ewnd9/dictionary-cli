@@ -69,6 +69,8 @@ const formatDictionaryTranslations = (translation) => {
 const formatDictionary = (result) => {
   return result.map(word => ({
     title: `${word.pos} (${word.ts})`,
+    pos: word.pos,
+    ts: word.ts,
     translations: word.tr.map(formatDictionaryTranslations)
   }));
 };
