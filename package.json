@@ -4,8 +4,8 @@
   "description": "translations and usage examples via yandex services",
   "main": "index.js",
   "scripts": {
-    "build": "babel -d dist lib",
-    "build:watch": "babel --watch -d dist lib",
+    "build": "babel -d dist src",
+    "build:watch": "babel --watch -d dist src",
     "prepublish": "npm run build",
     "postpublish": "rm -rf dist",
     "test": "nyc --reporter=lcov --reporter=text ava"
