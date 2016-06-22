@@ -33,7 +33,6 @@
   "author": "ewnd9 <ewndnine@gmail.com>",
   "dependencies": {
     "chalk": "^1.1.1",
-    "dot-file-config": "^0.6.0",
     "got": "^6.3.0",
     "lodash": "^4.13.1",
     "meow": "^3.7.0",
