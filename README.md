@@ -15,13 +15,13 @@ Export history to [memrise.com](http://www.memrise.com/) format
 
 ## Install
 
-```
+```sh
 $ npm install -g dictionary-cli
 ```
 
 ## Usage
 
-```
+```sh
 $ dictionary <lang-from> <lang-to> <input>
 
 # if input matches /[a-zA-Z]/ it will translate from english to <lang>, otherwise from <lang> to english
@@ -39,7 +39,7 @@ $ dictionary <lang> --export > history.txt
 
 Add aliases for language pairs in your `.bashrc` / `.zshrc`
 
-```
+```sh
 alias d="dictionary --en=ru" # use as "d <english or russian word or sentence>"
 # or
 alias d="dictionary en ru" # use as "d <english word or sentence>"
@@ -48,7 +48,9 @@ alias x="dictionary ru en" # use as "x <russian word or sentence>"
 
 ## Related
 
-- https://github.com/AnkurGel/dictionary-rb
+- [dictionary-rb](https://github.com/AnkurGel/dictionary-rb) - Provides meanings, similar words and usage examples for a word from Urban Dictionary and Dictionary Reference with CLI support
+
+- [traktor](https://github.com/d4rkr00t/traktor) - CLI for Yandex.Translator API + Yandex.Dictionary API
 
 ## Notices
 

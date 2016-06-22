@@ -53,7 +53,7 @@ if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.len
   cli.showHelp();
 } else if (cli.flags.export) {
   const result = require('./exporter').default(store.data.requests, cli.input[0]);
-  require('lodash/collection/shuffle')(result).forEach(function(word) {
+  require('lodash/shuffle')(result).forEach(function(word) {
     p(word);
   });
 } else {
@@ -61,7 +61,7 @@ if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.len
   toLang = toLang || cli.input[1];
 
   const lib = require('./index');
-  const space = require('lodash/string/repeat').bind(null, ' ');
+  const space = require('lodash/repeat').bind(null, ' ');
   const u = chalk.underline;
 
   lib

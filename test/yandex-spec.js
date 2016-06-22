@@ -10,7 +10,7 @@ const yandex = new Yandex(translateKey, dictionaryKey);
 
 test('#translate', async t => {
   const result = await yandex.translate('en', 'ru', 'java');
-  t.same(result, 'ява');
+  t.deepEqual(result, 'ява');
 });
 
 test('#dictionary', async t => {
