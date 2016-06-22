@@ -5,8 +5,10 @@
   "scripts": {
     "build": "babel -d dist src",
     "build:watch": "babel --watch -d dist src",
-    "prepublish": "npm run build",
+    "lint": "eslint 'src/**/*.js'",
     "postpublish": "rm -rf dist",
+    "prepublish": "npm run build",
+    "prepush": "npm run lint && npm test",
     "test": "npm run build && nyc --reporter=lcov --reporter=text ava"
   },
   "bin": {
@@ -41,12 +43,15 @@
     "ava": "^0.15.2",
     "babel-cli": "^6.4.0",
     "babel-core": "^6.4.0",
+    "babel-eslint": "^6.0.0",
     "babel-plugin-lodash": "^3.2.0",
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.4.3",
     "coveralls": "^2.11.6",
+    "eslint": "^2.7.0",
     "get-stream": "^2.3.0",
+    "husky": "^0.11.3",
     "nyc": "^6.6.1"
   }
 }

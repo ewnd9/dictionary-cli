@@ -3,7 +3,7 @@ import got from 'got';
 function Yandex(translateKey, dictionaryKey) {
   this.translateKey = translateKey;
   this.dictionaryKey = dictionaryKey;
-};
+}
 
 const get = (url, query) => got(url, { json: true, query }).then(_ => _.body);
 

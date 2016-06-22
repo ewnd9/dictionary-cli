@@ -57,7 +57,7 @@ if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.len
     .translate(fromLang, toLang, input)
     .then(({ type, result, corrected }) => {
       if (corrected) {
-        print(`\nnothing found by "${u(input)}", corrected to "${u(corrected)}"\n`)
+        print(`\nnothing found by "${u(input)}", corrected to "${u(corrected)}"\n`);
       }
 
       if (type === 'dictionary') {
@@ -66,10 +66,10 @@ if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.len
           r.translations.forEach(printTranslations);
         });
 
-        function printTranslations(r, i) {
+        function printTranslations(r) {
           print(`${space(2)}- ${u(r.translation)} ${r.synonyms ? r.synonyms + ' ' : ''}${r.means}`);
           r.examples.forEach(r => print(`${space(4)}-- ${r.title}`));
-        };
+        }
       } else {
         print(result);
       }

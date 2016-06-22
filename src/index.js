@@ -9,7 +9,7 @@ const yandex = new Yandex(
 );
 
 export const translate = (fromLang, toLang, text, corrected = null) => {
-  const translateFn = (text) => yandex.translate(fromLang, toLang, text);
+  const translateFn = text => yandex.translate(fromLang, toLang, text);
   const translateFallback = () => translateFn(text)
     .then(translation => {
       if (translation === text && !corrected) {
@@ -23,7 +23,7 @@ export const translate = (fromLang, toLang, text, corrected = null) => {
           } else {
             return translate(fromLang, toLang, spellResult, spellResult);
           }
-        };
+        }
       } else {
         return { type: 'translate', result: translation, corrected };
       }
@@ -42,11 +42,11 @@ export const translate = (fromLang, toLang, text, corrected = null) => {
   return dictionary().then(null, translateFallback);
 };
 
-const joiner = (array, delimiter) => {
+const joiner = array => {
   return array.length > 0 ? '(' + array.join(' | ') + ')' : '';
 };
 
-const formatDictionaryTranslations = (translation) => {
+const formatDictionaryTranslations = translation => {
   const synonyms = (translation.syn || []).map(syn => syn.text);
   const means = (translation.mean || []).map(means => means.text);
 
@@ -66,7 +66,7 @@ const formatDictionaryTranslations = (translation) => {
   };
 };
 
-const formatDictionary = (result) => {
+const formatDictionary = result => {
   return result.map(word => ({
     title: `${word.pos} (${word.ts})`,
     pos: word.pos,
