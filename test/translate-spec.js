@@ -2,11 +2,10 @@ import test from 'ava';
 import 'babel-core/register';
 
 import path from 'path';
-import concatStream from 'concat-stream';
+import getStream from 'get-stream';
 import { spawn } from 'child_process';
 
 import { translate } from './../src/index';
-import format from './../src/exporter';
 
 test('#translate dictionary', async t => {
   const { type, result } = await translate('en', 'ru', 'java');
@@ -29,64 +28,50 @@ test('#translate translate', async t => {
   t.is(result, 'dictionary can translate only words');
 });
 
-test('#format', async t => {
-  const response = await translate('en', 'ru', 'test');
-  const mock = {
-    ...response,
-    fromLang: 'en',
-    toLang: 'ru'
-  };
-
-  const data = format([mock], 'en');
-  t.truthy(data[0].length > 0);
-});
-
-const exec = (args, output) => {
-  const concat = concatStream(output);
-
+const exec = args => {
   const cp = spawn(path.resolve(__dirname, 'fixtures', 'cli.es6.js'), args);
   cp.stdout.setEncoding('utf8');
-  cp.stdout.pipe(concat);
+  cp.stderr.setEncoding('utf8');
+
+  return Promise
+    .all([
+      getStream(cp.stdout),
+      getStream(cp.stderr)
+        .then(res => {
+          if (res.length > 0) {
+            throw new Error(res);
+          }
+        })
+    ])
+    .then(([ stdout, stderr ]) => stdout);
 };
 
-test.cb('cli stdin/stdout default en-ru', t => {
-  exec(['en', 'ru', 'u'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout default en-ru', async t => {
+  const str = await exec(['en', 'ru', 'u']);
+  t.truthy(str.length > 0);
 });
 
-test.cb('cli stdin/stdout spell correction en-ru', t => {
-  exec(['en', 'ru', 'powir'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout spell correction en-ru', async t => {
+  const str = await exec(['en', 'ru', 'powir']);
+  t.truthy(str.length > 0);
 });
 
-test.cb('cli stdin/stdout en detection en-ru', t => {
-  exec(['--en=ru', 'u'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout en detection en-ru', async t => {
+  const str = await exec(['--en=ru', 'u']);
+  t.truthy(str.length > 0);
 });
 
-test.cb('cli stdin/stdout en detection ru-en', t => {
-  exec(['--en=ru', 'привет'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout en detection ru-en', async t => {
+  const str = await exec(['--en=ru', 'привет']);
+  t.truthy(str.length > 0);
 });
 
-test.cb('cli stdin/stdout ru detection en-ru', t => {
-  exec(['--ru=en', 'u'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout ru detection en-ru', async t => {
+  const str = await exec(['--ru=en', 'u']);
+  t.truthy(str.length > 0);
 });
 
-test.cb('cli stdin/stdout ru detection ru-en', t => {
-  exec(['--ru=en', 'привет'], str => {
-    t.truthy(str.length > 0);
-    t.end();
-  });
+test('cli stdin/stdout ru detection ru-en', async t => {
+  const str = await exec(['--ru=en', 'привет']);
+  t.truthy(str.length > 0);
 });

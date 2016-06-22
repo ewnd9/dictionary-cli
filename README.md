@@ -9,8 +9,6 @@ Translations, usage examples and spell check via
 - [yandex dictionary api](https://tech.yandex.ru/dictionary/)
 ([supported languages](https://dictionary.yandex.net/api/v1/dicservice/getLangs?key=dict.1.1.20140616T070444Z.ecfe60ba07dd3ebc.9ce897a05d9daa488b050e5ec030f625d666530a))
 
-Export history to [memrise.com](http://www.memrise.com/) format
-
 ![Demonstration](/demo.gif?raw=true)
 
 ## Install

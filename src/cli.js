@@ -1,8 +1,5 @@
-const store = require('dot-file-config')('.dictionary-cli-npm');
-store.data.requests = store.data.requests || {};
-
-const meow = require('meow');
-const chalk = require('chalk');
+import meow from 'meow';
+import chalk from 'chalk';
 
 const cli = meow({
   pkg: './../package.json',
@@ -16,14 +13,11 @@ const cli = meow({
     '  dictionary --ru=<lang> <input>',
     '',
     '  dictionary <lang> --export',
-    '  dictionary <lang> --export > history.txt',
-    '',
-    'Data',
-    '  ' + store.path
+    '  dictionary <lang> --export > history.txt'
   ]
 });
 
-const p = console.log.bind(console);
+const print = console.log.bind(console);
 
 let fromLang;
 let toLang;
@@ -51,11 +45,6 @@ if (cli.flags.en) {
 
 if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.length === 0) {
   cli.showHelp();
-} else if (cli.flags.export) {
-  const result = require('./exporter').default(store.data.requests, cli.input[0]);
-  require('lodash/shuffle')(result).forEach(function(word) {
-    p(word);
-  });
 } else {
   fromLang = fromLang || cli.input[0];
   toLang = toLang || cli.input[1];
@@ -68,32 +57,22 @@ if (cli.flags.export && cli.input.length !== 1 || !cli.flags.export && input.len
     .translate(fromLang, toLang, input)
     .then(({ type, result, corrected }) => {
       if (corrected) {
-        p(`\nnothing found by "${u(input)}", corrected to "${u(corrected)}"\n`)
+        print(`\nnothing found by "${u(input)}", corrected to "${u(corrected)}"\n`)
       }
 
       if (type === 'dictionary') {
         result.forEach(r => {
-          p(`${u(r.pos)} ${r.ts ? '(' + r.ts + ')' : ''}`);
+          print(`${u(r.pos)} ${r.ts ? '(' + r.ts + ')' : ''}`);
           r.translations.forEach(printTranslations);
         });
 
         function printTranslations(r, i) {
-          p(`${space(2)}- ${u(r.translation)} ${r.synonyms ? r.synonyms + ' ' : ''}${r.means}`);
-          r.examples.forEach(r => p(`${space(4)}-- ${r.title}`));
+          print(`${space(2)}- ${u(r.translation)} ${r.synonyms ? r.synonyms + ' ' : ''}${r.means}`);
+          r.examples.forEach(r => print(`${space(4)}-- ${r.title}`));
         };
       } else {
-        p(result);
+        print(result);
       }
-
-      store.data.requests[new Date().toString()] = {
-        input,
-        fromLang,
-        toLang,
-        result,
-        type
-      };
-
-      store.save();
     })
     .catch(err => {
       if (err.message === 'no translation') {

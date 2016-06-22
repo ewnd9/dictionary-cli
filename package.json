@@ -1,7 +1,7 @@
 {
   "name": "dictionary-cli",
   "version": "2.0.1",
-  "description": "translations and usage examples via yandex services",
+  "description": "Translate and look up usage examples via yandex services",
   "scripts": {
     "build": "babel -d dist src",
     "build:watch": "babel --watch -d dist src",
@@ -45,8 +45,8 @@
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.4.3",
-    "concat-stream": "^1.5.0",
     "coveralls": "^2.11.6",
+    "get-stream": "^2.3.0",
     "nyc": "^6.6.1"
   }
 }
