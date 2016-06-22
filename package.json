@@ -1,6 +1,6 @@
 {
   "name": "dictionary-cli",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Translate and look up usage examples via yandex services",
   "scripts": {
     "build": "babel -d dist src",
